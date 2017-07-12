@@ -1,6 +1,7 @@
 # Exemplo de uso de uma aplicação django para percorrer o fluxo de deploy no gitlab.
 
-### requisitos
+
+### Requisitos
 * Docker
 
 
