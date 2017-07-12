@@ -1,6 +1,6 @@
 
 INPUT=$(filter-out $@,$(MAKECMDGOALS))
-MANAGE_PY=$(VIRTUAL_ENV)/bin/python manage.py
+MANAGE_PY=python manage.py
 
 PROJECT_NAME='django_and_gitlab'
 
@@ -11,18 +11,10 @@ prod: $(eval SETTINGS:=$(SETTINGS_PROD))
 requirements: 
 	@pip install -r requirements.txt
 
-superuser: 
-	@$(MANAGE_PY) createsuperuser z
-
+build:
+	@docker build  -t  demo_app_gitlab . 
 
 runserver:
-	@$(MANAGE_PY) runserver 
-
-mig:
-	@$(MANAGE_PY) migrate 
-
-makemig:
-	@$(MANAGE_PY) makemigrations z
-
+	@docker run -it  -p 8080:8080 demo_app_gitlab 
 test:
-	@$(MANAGE_PY) test
+	@docker run -it demo_app_gitlab $(MANAGE_PY) test
